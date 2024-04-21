@@ -14,4 +14,4 @@ const block1 = new Block({
   data: "foo-data",
 });
 
-console.log("block1", block1);
+module.exports = Block;
