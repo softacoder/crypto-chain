@@ -102,15 +102,28 @@ describe("isValidChain()", () => {
 });
 
 describe("replaceChain()", () => {
-  let errorMock, logMock;
+  let errorMock, logMock, newChain, originalChain;
 
   beforeEach(() => {
     errorMock = jest.fn();
     logMock = jest.fn();
+    newChain = new Blockchain(); // Define newChain
+    originalChain = blockchain.chain; // Define originalChain
 
     global.console.error = errorMock;
     global.console.log = logMock;
   });
+
+  // describe("replaceChain()", () => {
+  //   let errorMock, logMock;
+
+  //   beforeEach(() => {
+  //     errorMock = jest.fn();
+  //     logMock = jest.fn();
+
+  //     global.console.error = errorMock;
+  //     global.console.log = logMock;
+  //   });
 
   describe("when the new chain is not longer", () => {
     beforeEach(() => {
