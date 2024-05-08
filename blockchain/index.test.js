@@ -99,8 +99,8 @@ describe("replaceChain()", () => {
 
   beforeEach(() => {
     logMock = jest.fn();
-    newChain = new Blockchain(); // Define newChain
-    originalChain = blockchain.chain; // Define originalChain
+    newChain = new Blockchain();
+    originalChain = blockchain.chain;
 
     global.console.log = logMock;
   });
@@ -223,20 +223,34 @@ describe("validTransactionData()", () => {
 
       describe("and the transaction has at least one malformed input", () => {
         it("returns false and logs an error", () => {
-          rewardTransaction.outputMap[wallet.publicKey] = 999999;
+          wallet.balance = 9000;
 
-          newChain.addBlock({ data: [transaction, rewardTransaction] });
+          const evilOutputMap = {
+            [wallet.publicKey]: 8900,
+            fooRecipient: 100,
+          };
 
+          const evilTransaction = {
+            input: {
+              timestamp: Date.now(),
+              amount: wallet.balance,
+              address: wallet.publicKey,
+              signature: wallet.sign(evilOutputMap),
+            },
+            outputMap: evilOutputMap,
+          };
+
+          newChain.addBlock({ data: [evilTransaction, rewardTransaction] });
           expect(
             blockchain.validTransactionData({ chain: newChain.chain })
           ).toBe(false);
           expect(errorMock).toHaveBeenCalled();
         });
       });
-    });
 
-    describe("and a block contains multiple identical transactions", () => {
-      it("returns false and logs an error", () => {});
+      describe("and a block contains multiple identical transactions", () => {
+        it("returns false and logs an error", () => {});
+      });
     });
   });
 });
