@@ -160,6 +160,19 @@ describe("replaceChain()", () => {
       });
     });
   });
+
+  describe("and the `validTransactions` flag is true", () => {
+    it("calls validTransactionData", () => {
+      const validTransactionData = validTransactionDataMock;
+
+      blockchain.validTransaction = validTransactionDataMock;
+
+      newChain.addBlock({ data: "foo" });
+      blockchain.replaceChain(newChain.chain, true);
+
+      expect(validTransactionDataMock).toHaveBeenCalled();
+    });
+  });
 });
 
 describe("validTransactionData()", () => {
