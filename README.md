@@ -4,6 +4,10 @@
 
 # A backend + frontend with Node.js, Express, React, & more!
 
+# https://codeyourfuture.udemy.com/course/build-blockchain-full-stack/learn/lecture/12610358#overview
+
+# Please note this website with code is not deployed on Heroku to avoid costs. In the tutorial there is instructions hw to do this.
+
 Code a full-on backend with test-driven development.
 Write a full test suite for the backend.
 Build a Blockchain in the object-oriented programming style.
